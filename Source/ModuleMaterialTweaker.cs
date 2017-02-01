@@ -3,7 +3,6 @@
 // License: Public Domain.
 
 using System;
-using System.Linq;
 using UnityEngine;
 
 namespace KSPDev.PartTweaker {
@@ -23,7 +22,7 @@ public sealed class ModuleMaterialTweaker : PartModule {
 
   /// <summary>Specifies if Alpha component is allowed to be customized.</summary>
   [KSPField]
-  public bool showAlpha = true;
+  public bool showAlpha;
 
   /// <summary>Specifies if RGB components are allowed to be customized.</summary>
   [KSPField]
@@ -31,7 +30,7 @@ public sealed class ModuleMaterialTweaker : PartModule {
 
   /// <summary>Specifies if color adjusting settings should eb available in flight.</summary>
   [KSPField]
-  public bool allowInFlight = false;
+  public bool allowInFlight;
 
   /// <summary>R component of the color.</summary>
   [KSPField(isPersistant = true, guiName = "R", guiActiveEditor = true),
