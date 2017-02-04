@@ -3,6 +3,7 @@
 // License: Public Domain.
 
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace KSPDev.PartTweaker {
@@ -32,6 +33,10 @@ public sealed class ModuleMaterialTweaker : PartModule {
   [KSPField]
   public bool allowInFlight;
 
+  /// <summary>Comma separated list of model names to affect. Case-insensitive.</summary>
+  [KSPField]
+  public string modelNames = "";
+
   /// <summary>R component of the color.</summary>
   [KSPField(isPersistant = true, guiName = "R", guiActiveEditor = true),
    UI_FloatRange(stepIncrement = 0.05f, maxValue = 1f, minValue = 0f)]
@@ -51,17 +56,6 @@ public sealed class ModuleMaterialTweaker : PartModule {
   [KSPField(isPersistant = true, guiName = "Alpha", guiActiveEditor = true),
    UI_FloatRange(stepIncrement = 0.05f, maxValue = 1f, minValue = 0f)]
   public float colorA = 1f;
-
-  /// <summary>Model's material.</summary>
-  protected Material material {
-    get {
-      if (!_material) {
-        _material = part.FindModelComponent<Renderer>().material;
-      }
-      return _material;
-    }
-  }
-  Material _material;
 
   #region PartModule overrides
   /// <inheritdoc/>
@@ -93,7 +87,16 @@ public sealed class ModuleMaterialTweaker : PartModule {
 
   #region Local utility methods
   void UpdateColor() {
-    material.SetColor(materialVarName, new Color(colorR, colorG, colorB, colorA));
+    var arrModelNames = modelNames.Split(',').Select(x => x.Trim().ToLower());
+    var materials = part.FindModelComponents<Renderer>()
+        .Where(x => arrModelNames.Contains(x.name.ToLower()))
+        .Select(x => x.material);
+    var newColor = new Color(colorR, colorG, colorB, colorA);
+    foreach (var material in materials) {
+      Debug.LogFormat("Adjust color on {0}: name={1}, value={2}, model={3}",
+                      part.name, materialVarName, newColor, material.name);
+      material.SetColor(materialVarName, newColor);
+    }
   }
 
   void SetColorComponent(BaseField field, string guiName) {
