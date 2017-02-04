@@ -9,6 +9,7 @@ Simple KSP part module that allows changing one color property of the model's ma
 MODULE
 {
 	name = ModuleMaterialTweaker
+	modelNames = planet1,planet2
 	varDisplayName = Color
 	materialVarName = _Color
 	showAlpha = false
@@ -20,6 +21,7 @@ MODULE
 	colorA = 1.0
 }
 ```
+`modelNames` values are case-insensitive.
 
 See sources for the defaults and comments.
 
