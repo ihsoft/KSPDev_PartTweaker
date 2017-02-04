@@ -93,7 +93,7 @@ public sealed class ModuleMaterialTweaker : PartModule {
 
   #region Local utility methods
   void UpdateColor() {
-    material.SetColor(materialVarName, new Color(colorR, colorB, colorG, colorA));
+    material.SetColor(materialVarName, new Color(colorR, colorG, colorB, colorA));
   }
 
   void SetColorComponent(BaseField field, string guiName) {
