@@ -1,9 +1,10 @@
 # PartTweaker
 
-Simple KSP part module that allows changing one color property of the model's material.
+Various modules to tweak different settings on the part or its model(s).
 
+## ModuleMaterialTweaker
 
-## Sample usage
+Replaces the specified color parameter on the requested models.
 
 ```
 MODULE
@@ -26,3 +27,21 @@ MODULE
 See sources for the defaults and comments.
 
 Value for `materialVarName` depends on the shader used. See Unity docs for more details.
+
+## ModuleMeshVisibility
+
+Hides (deletes, to be more specific) renderers on the specified models.
+
+```
+MODULE
+{
+	name = ModuleMeshVisibility
+	modelNames = planet1,planet2
+	visibleInScene = EditorOnly
+}
+```
+
+Allowed values for `visibleInScene`:
+* EditorOnly
+* FlightOnly
+* Any
