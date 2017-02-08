@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace KSPDev.PartTweaker {
 
-/// <summary>Simple module that allows overriding renderer material color property.</summary>
+/// <summary>Simple module that allows hiding selected renderers.</summary>
 public sealed class ModuleMeshVisibility : PartModule {
 
   /// <summary>Scenes when the meshes are visible.</summary>
@@ -19,6 +19,8 @@ public sealed class ModuleMeshVisibility : PartModule {
     FlightOnly,
     /// <summary>Always.</summary>
     Any,
+    /// <summary>Drop from all scenes but leave in the icon.</summary>
+    IconOnly,
   }
 
   /// <summary>Comma separated list of model names to affect. Case-insensitive.</summary>
