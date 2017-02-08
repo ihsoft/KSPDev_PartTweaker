@@ -71,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModuleMaterialTweaker.cs" />
-    <Compile Include="ModuleMeshVisibility.cs" />
+    <Compile Include="ModuleModelTweaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,8 +8,8 @@ using UnityEngine;
 
 namespace KSPDev.PartTweaker {
 
-/// <summary>Simple module that allows hiding selected renderers.</summary>
-public sealed class ModuleMeshVisibility : PartModule {
+/// <summary>Simple module that allows hiding selected model objects.</summary>
+public sealed class ModuleModelTweaker : PartModule {
 
   /// <summary>Scenes when the meshes are visible.</summary>
   public enum VisibilityState {
@@ -47,11 +47,17 @@ public sealed class ModuleMeshVisibility : PartModule {
       return;
     }
     var arrModelNames = modelNames.Split(',').Select(x => x.Trim().ToLower());
-    var renderers = part.FindModelComponents<Renderer>()
-        .Where(x => arrModelNames.Contains(x.name.ToLower()));
-    foreach (var renderer in renderers) {
-      Debug.LogFormat("Drop renderer {0} on {1}", renderer.name, part.name);
-      DestroyImmediate(renderer);
+    var objects = part.FindModelComponents<Transform>()
+        .Where(x => arrModelNames.Contains(x.name.ToLower()))
+        .Select(x => x.gameObject);
+    foreach (var obj in objects) {
+      if (obj == part.gameObject) {
+        Debug.LogWarningFormat("Cannot drop root part's object {0} on {1}. Ignoring",
+                               obj.name, part.name);
+      } else {
+        Debug.LogFormat("Drop object {0} on {1}", obj.name, part.name);
+        DestroyImmediate(obj);
+      }
     }
   }
   #endregion
