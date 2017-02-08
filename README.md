@@ -42,6 +42,7 @@ MODULE
 ```
 
 Allowed values for `visibleInScene`:
-* EditorOnly
-* FlightOnly
-* Any
+* `EditorOnly`
+* `FlightOnly`
+* `Any` - same as no module at all.
+* `IconOnly` - only present meshes in the icon.
