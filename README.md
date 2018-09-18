@@ -28,7 +28,7 @@ See sources for the defaults and comments.
 
 Value for `materialVarName` depends on the shader used. See Unity docs for more details.
 
-## ModuleMeshVisibility
+## ModuleModelTweaker
 
 Hides (deletes, to be more specific) renderers on the specified models.
 
